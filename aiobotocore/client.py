@@ -299,10 +299,6 @@ class AioBaseClient(BaseClient):
         # await self._endpoint.close()
 
     async def _make_api_call(self, operation_name, api_params):
-
-
-
-
         operation_model = self._service_model.operation_model(operation_name)
         service_name = self._service_model.service_name
         history_recorder.record(
@@ -340,7 +336,6 @@ class AioBaseClient(BaseClient):
         )
 
         error_class = self.exceptions.from_code(403)
-        raise error_class({}, operation_name)
 
         if event_response is not None:
             http, parsed_response = event_response

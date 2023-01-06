@@ -45,6 +45,7 @@ _HANDLER_MAPPING = {
 
 class AioHierarchicalEmitter(HierarchicalEmitter):
     async def _emit(self, event_name, kwargs, stop_on_response=False):
+        return []
         responses = []
         # Invoke the event handlers from most specific
         # to least specific, each time stripping off a dot.
@@ -70,6 +71,8 @@ class AioHierarchicalEmitter(HierarchicalEmitter):
         return responses
 
     async def emit_until_response(self, event_name, **kwargs):
+        return None, None
+        
         responses = await self._emit(event_name, kwargs, stop_on_response=True)
         if responses:
             return responses[-1]
@@ -84,6 +87,7 @@ class AioHierarchicalEmitter(HierarchicalEmitter):
         register_method,
         unique_id_uses_count,
     ):
+        return
         handler = _HANDLER_MAPPING.get(handler, handler)
 
         self._verify_is_callable(handler)
