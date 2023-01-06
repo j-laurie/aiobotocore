@@ -295,9 +295,15 @@ class AioBaseClient(BaseClient):
 
     async def close(self):
         """Closes underlying endpoint connections."""
-        await self._endpoint.close()
+        pass
+        # await self._endpoint.close()
 
     async def _make_api_call(self, operation_name, api_params):
+        error_class = self.exceptions.from_code(403)
+        raise error_class("parsed_response", operation_name)
+
+
+
         operation_model = self._service_model.operation_model(operation_name)
         service_name = self._service_model.service_name
         history_recorder.record(
@@ -513,8 +519,10 @@ class AioBaseClient(BaseClient):
         )
 
     async def __aenter__(self):
-        await self._endpoint.http_session.__aenter__()
         return self
+        # await self._endpoint.http_session.__aenter__()
+        # return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        await self._endpoint.http_session.__aexit__(exc_type, exc_val, exc_tb)
+        pass
+        # await self._endpoint.http_session.__aexit__(exc_type, exc_val, exc_tb)
