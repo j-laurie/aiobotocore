@@ -300,7 +300,7 @@ class AioBaseClient(BaseClient):
 
     async def _make_api_call(self, operation_name, api_params):
         error_class = self.exceptions.from_code(403)
-        raise error_class("parsed_response", operation_name)
+        raise error_class({}, operation_name)
 
 
 
